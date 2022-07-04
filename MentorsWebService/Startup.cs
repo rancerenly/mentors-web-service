@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -31,7 +32,21 @@ namespace MentorsWebService
             
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseMvc(option =>
+            {
+                option.MapRoute(
+                    null, 
+                    "{Category}/{Page:int}",//http://book/2  
+                    new { controller = "Admin", action = "Add" }
+                    );
+                
+                option.MapRoute(
+                    null,
+                    "{controller=Home}/{action=Index}/{id?}" 
+                    );
+            });
+            
+
         }
     }
 }

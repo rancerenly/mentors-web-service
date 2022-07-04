@@ -16,9 +16,8 @@ namespace MentorsWebService
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            MvcOptions mvcOptions = new MvcOptions();
-            
-            mvcOptions.EnableEndpointRouting = false;
+            MvcOptions options = new MvcOptions();
+            services.AddMvc(options => options.EnableEndpointRouting = false);
             
             services.AddMvc();
         }
@@ -32,11 +31,11 @@ namespace MentorsWebService
             
             app.UseStaticFiles();
 
-            app.UseMvc(option =>
+            /*app.UseMvc(option =>
             {
                 option.MapRoute(
                     null, 
-                    "{Category}/{Page:int}",//http://book/2  
+                    "{Category}/{Page:int}",
                     new { controller = "Admin", action = "Add" }
                     );
                 
@@ -44,9 +43,9 @@ namespace MentorsWebService
                     null,
                     "{controller=Home}/{action=Index}/{id?}" 
                     );
-            });
-            
+            });*/
 
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

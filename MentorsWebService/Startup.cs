@@ -16,7 +16,6 @@ namespace MentorsWebService
     {
         public void ConfigureServices(IServiceCollection services)
         {
-           
             services.AddMvc(options => options.EnableEndpointRouting = false);
             
             services.AddMvc();
@@ -45,7 +44,7 @@ namespace MentorsWebService
                     );
             });
 
-            
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

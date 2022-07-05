@@ -13,7 +13,10 @@ namespace MentorsWebService.Models
         public string Description { get; set; }
 
         public ICollection<Client> Clients { get; set; } = new List<Client>();
-        
-        public ICollection<Teacher>  Teachers { get; set; } = new List<Teacher>();
+
+        public ICollection<Module> Modules { get; set; } = new List<Module>();
+
+        public int TeacherId { get; set; }
+        public Teacher Teacher { get; set; } 
     }
 }

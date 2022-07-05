@@ -1,8 +1,13 @@
-﻿namespace MentorsWebService.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace MentorsWebService.Models
 {
-    public class Teacher
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
+    public class Teacher : IdentityUser
+    { 
+        public int MajorId { get; set; } 
+        public Major Major { get; set; }
+        public string Certificate { get; set; }
+        public string Bio { get; set; }
+       
     }
 }

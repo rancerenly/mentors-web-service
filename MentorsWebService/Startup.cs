@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MentorsWebService.Infrastructure;
 
 namespace MentorsWebService
 {
@@ -26,7 +27,9 @@ namespace MentorsWebService
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
             
-            services.AddDbContext<DbContextMentors>(options => options.UseSqlServer(_configuration["MentorsSchool: ConnectionStrings"]));
+            services.AddDbContext<DbContextMentors>(options => options.UseSqlServer(_configuration["MentorsSchool:ConnectionStrings"]));
+            
+            SeedDb.Init(services);
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -37,22 +40,9 @@ namespace MentorsWebService
             }
             
             app.UseStaticFiles();
-
-            app.UseMvc(option =>
-            {
-                option.MapRoute(
-                    null, 
-                    "{Category}/{Page:int}",
-                    new { controller = "Admin", action = "Add" }
-                    );
-                
-                option.MapRoute(
-                    null,
-                    "{controller=Home}/{action=Index}/{id?}" 
-                    );
-            });
-
+            
             app.UseMvcWithDefaultRoute();
+            
         }
     }
 }

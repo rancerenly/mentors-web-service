@@ -7,8 +7,10 @@ namespace MentorsWebService.Models
     {
         IQueryable<Teacher> GetTeachers { get; }
         IQueryable<Client> GetClients { get; }
+        IQueryable<Major> GetMajors { get; }
 
-        Client GetClient(string Id);
-        Teacher GetTeacher(string Id);
+        Client GetClient(string id);
+        Teacher GetTeacher(string id);
+        Major GetMajor(int id);
     }
 }

@@ -11,6 +11,6 @@ namespace MentorsWebService.Controllers
         {
             repository = repos;
         }
-        public IActionResult Index() => View(repository.GetClients);
+        public IActionResult Index() => View(repository.GetMajors);
     }
 }

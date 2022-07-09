@@ -1,28 +1,25 @@
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace MentorsWebService.Models
 {
     public class Repository : IRepository
     {
         private DbContextMentors DbContext;
-        public Repository(DbContextMentors dbcontext)
+        public Repository(DbContextMentors dbContext)
         {
-            DbContext = dbcontext;
+            DbContext = dbContext;
         }
 
         public IQueryable<Teacher> GetTeachers => DbContext.Teachers;
         
         public IQueryable<Client> GetClients => DbContext.Clients;
+        public IQueryable<Major> GetMajors => DbContext.Majors.Include(t => t.Teacher);
 
-        public Client GetClient(string Id)
-        {
-            return DbContext.Clients.FirstOrDefault(o => o.Id == Id);
-        }
+        public Client GetClient(string id) => DbContext.Clients.FirstOrDefault(o => o.Id == id);
 
-        public Teacher GetTeacher(string Id)
-        {
-            return DbContext.Teachers.FirstOrDefault(o => o.Id == Id);
-        }
+        public Teacher GetTeacher(string id) => DbContext.Teachers.FirstOrDefault(o => o.Id == id);
+        public Major GetMajor(int id) => DbContext.Majors.FirstOrDefault(m => m.Id == id);
     }
 }

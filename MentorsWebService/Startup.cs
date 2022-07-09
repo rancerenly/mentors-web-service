@@ -25,6 +25,8 @@ namespace MentorsWebService
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IRepository, Repository>();
+            
             services.AddMvc(options => options.EnableEndpointRouting = false);
             
             services.AddDbContext<DbContextMentors>(options => options.UseSqlServer(_configuration["MentorsSchool:ConnectionStrings"]));

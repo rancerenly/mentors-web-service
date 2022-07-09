@@ -3,8 +3,14 @@ using MentorsWebService.Models;
 
 namespace MentorsWebService.Controllers
 {
+    
     public class HomeController : Controller
     {
-        public IActionResult Index() => View();
+        private IRepository repository;
+        public HomeController(IRepository repos)
+        {
+            repository = repos;
+        }
+        public IActionResult Index() => View(repository.GetClients);
     }
 }

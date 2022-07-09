@@ -1,7 +1,12 @@
-
+@model IQueryable<Client>
 @{
     ViewData["Title"] = "Index";
 }
+<h1>Welcome</h1>
+@foreach (var item in Model)
+{
+    <h1>@item.UserName</h1>
+}
 
-<h1>Index</h1>
+
 

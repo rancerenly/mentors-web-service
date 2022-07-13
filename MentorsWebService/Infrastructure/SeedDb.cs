@@ -11,11 +11,23 @@ namespace MentorsWebService.Infrastructure
     {
         public static void Initialize(DbContextMentors context)
         {
+            var Teacher = new Teacher { UserName = "FirstTeacher" };
             context.Database.EnsureCreated();
 
             if (!context.Clients.Any())
             {
                 context.Clients.Add(new Client { UserName = "c1"});
+                context.SaveChanges();
+            }
+            if (!context.Teachers.Any())
+            {
+                context.Teachers.Add(Teacher);
+                context.SaveChanges();
+            }
+
+            if (!context.Majors.Any())
+            {
+                context.Majors.Add(new Major { Title = "Разработка ПО", Teacher = Teacher, Description = "Some desc..."});
                 context.SaveChanges();
             }
         }

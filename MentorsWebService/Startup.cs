@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MentorsWebService.Infrastructure;
+using Microsoft.AspNetCore.Identity;
 
 namespace MentorsWebService
 {
@@ -31,6 +32,10 @@ namespace MentorsWebService
             
             services.AddDbContext<DbContextMentors>(options => options.UseSqlServer(_configuration["MentorsSchool:ConnectionStrings"]));
             
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<DbContextMentors>()
+                .AddDefaultTokenProviders();
+            
             SeedDb.Init(services);
         }
         
@@ -42,7 +47,8 @@ namespace MentorsWebService
             }
             
             app.UseStaticFiles();
-            
+            app.UseAuthentication();
+
             app.UseMvcWithDefaultRoute();
             
         }

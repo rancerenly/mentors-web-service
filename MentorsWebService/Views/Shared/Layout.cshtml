@@ -15,9 +15,11 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link" href="#">Войти</a>
+          <a class="nav-link">Войти</a>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#">Зарегистрироваться</a></li>
+        <li class="nav-item"><a class="nav-link" asp-action="Register" asp-controller="Account">Зарегистрироваться</a></li>
+        <li class="nav-item"><a class="nav-link" asp-action="Login" asp-controller="Account">Вход</a></li>
+        <li class="nav-item"><a class="nav-link" asp-action="UserAccount" asp-controller="Home">Личный кабинет</a></li>
       </ul>
       <a class="btn btn-primary" href="#" style="margin-right: 5%">Мой профиль</a>
       <form class="d-flex">

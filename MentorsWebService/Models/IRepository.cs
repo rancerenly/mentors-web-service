@@ -12,5 +12,7 @@ namespace MentorsWebService.Models
         Client GetClient(string id);
         Teacher GetTeacher(string id);
         Major GetMajor(int id);
+
+        void AddTeacher(Teacher teacher);
     }
 }

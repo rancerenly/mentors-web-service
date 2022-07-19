@@ -1,0 +1,28 @@
+﻿@model ViewUser
+
+<form asp-action="Login" asp-controller="Account" method="post">
+    <div asp-validation-summary="All" class="text-danger">
+    
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputUsername1" class="form-label">Username</label>
+        <input type="text" class="form-control" id="exampleInputUsername1" asp-for="Username">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" asp-for="Email">
+        <div id="emailHelp" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" asp-for="Password">
+        <div id="passwordHelp" class="form-text">Пароль должен быть более 8 символов.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword2" asp-for="PasswordConfirm">
+        <div id="passwordHelp2" class="form-text">Пароль должен быть более 8 символов.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

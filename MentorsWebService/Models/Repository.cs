@@ -13,7 +13,6 @@ namespace MentorsWebService.Models
         }
 
         public IQueryable<Teacher> GetTeachers => DbContext.Teachers;
-        
         public IQueryable<Client> GetClients => DbContext.Clients;
         public IQueryable<Major> GetMajors => DbContext.Majors.Include(t => t.Teacher);
 
@@ -21,5 +20,17 @@ namespace MentorsWebService.Models
 
         public Teacher GetTeacher(string id) => DbContext.Teachers.FirstOrDefault(o => o.Id == id);
         public Major GetMajor(int id) => DbContext.Majors.FirstOrDefault(m => m.Id == id);
+        
+        public void AddTeacher(Teacher teacher)
+        {
+            var isExist = DbContext.Teachers.Any(t => t.Id == null);
+            
+            if (!isExist)
+            {
+                DbContext.Teachers.Add(teacher);
+            }
+            
+            DbContext.SaveChanges();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MentorsWebService.Models;
@@ -22,8 +23,14 @@ namespace MentorsWebService.Controllers
             var getUser = await _user.GetUserAsync(HttpContext.User);
             if (getUser != null)
             {
-                TestUser testUser = new TestUser { UserName = getUser.UserName };
-                return View(testUser);
+                if (getUser is Teacher teacher)
+                {
+                    return View("TeacherAccount", teacher);
+                }
+                if (getUser is Client client)
+                {
+                    return View("ClientAccount", client);
+                }
             }
             return RedirectToAction("Login", "Account");
         }

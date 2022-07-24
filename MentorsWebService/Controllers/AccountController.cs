@@ -58,34 +58,55 @@ namespace MentorsWebService.Controllers
         [AllowAnonymous]
         public IActionResult Register()
         {
-            return View(new ViewUser());
+            return View();
+        }
+        
+        [HttpGet]
+        public IActionResult RegisterClient()
+        {
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(ViewUser user)
+        public async Task<IActionResult> RegisterClient(ViewClient user)
         {
             if (ModelState.IsValid)
             {
-                var newTeacher = new Teacher
-                {
-                    // passwordHash!
-                    UserName = user.Username,
-                    NormalizedUserName = user.Username,
-                    NormalizedEmail = user.Email,
-                    Email = user.Email,
-                    Bio = "Some bio"
-                };
+                var newClient = Mapping<Client, ViewClient>.MappingUser(user);
+
+                RegisterUser<Client> regClient = new RegisterUser<Client>();
+                var result = await regClient.RegisterUsers(newClient, user.Password, _signInManager, _user);
                 
-                var result = await _user.CreateAsync(newTeacher, user.Password);
-                if (result.Succeeded)
+                if (result != null)
                 {
-                    await _signInManager.SignInAsync(newTeacher, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("UserAccount", "Home");
                 }
             }
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public IActionResult RegisterTeacher()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterTeacher(ViewTeacher user)
+        {
+            if (ModelState.IsValid)
+            {
+                var newTeacher = Mapping<Teacher, ViewTeacher>.MappingUser(user);
 
-            return Redirect("~/Home/Account");
+                RegisterUser<Teacher> regTeacher = new RegisterUser<Teacher>();
+                var result = await regTeacher.RegisterUsers(newTeacher, user.Password, _signInManager, _user);
+                
+                if (result != null)
+                {
+                    return RedirectToAction("UserAccount", "Home");
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
 
     }

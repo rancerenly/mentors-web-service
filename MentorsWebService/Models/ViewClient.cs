@@ -2,7 +2,7 @@
 
 namespace MentorsWebService.Models
 {
-    public class ViewUser
+    public class ViewClient
     {
         [Required (ErrorMessage ="Введите Username")]
         public string Username { get; set; }

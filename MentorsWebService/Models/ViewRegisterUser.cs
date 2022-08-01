@@ -2,7 +2,12 @@
 
 namespace MentorsWebService.Models
 {
-    public class ViewTeacher
+    public enum UserRoles
+    {
+        Teacher,
+        Client
+    }
+    public class ViewRegisterUser
     {
         [Required (ErrorMessage ="Введите Username")]
         public string Username { get; set; }
@@ -23,7 +28,8 @@ namespace MentorsWebService.Models
         [EmailAddress]
         public string Email { get; set; }
         
-        [Required(ErrorMessage = "Введите своё Био")]
         public string Bio { get; set; }
+        [Required]
+        public UserRoles Role { get; set; }
     }
 }

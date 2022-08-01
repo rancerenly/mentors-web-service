@@ -2,6 +2,7 @@
 using System.Linq;
 using MentorsWebService.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,6 +26,12 @@ namespace MentorsWebService.Infrastructure
                 context.SaveChanges();
             }
 
+            if (!context.Roles.Any())
+            {
+                context.Roles.Add(new IdentityRole("Teacher"));
+                context.Roles.Add(new IdentityRole("Client"));
+                context.SaveChanges();
+            }
             if (!context.Majors.Any())
             {
                 context.Majors.Add(new Major { Title = "Разработка ПО", Teacher = Teacher, Description = "Some desc..."});

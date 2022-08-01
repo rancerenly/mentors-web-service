@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MentorsWebService.Models;
+using MentorsWebService.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -54,52 +55,45 @@ namespace MentorsWebService.Controllers
             return RedirectToAction("Register");
         }
 
+        [Authorize(Roles = nameof(Teacher))]
+        public IActionResult CreateMajor()
+        {
+            // действия по созданию направления
+            // редирект на направление...
+            return View("Register");
+        }
+
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         
-        [HttpGet]
-        public IActionResult RegisterClient()
+        // [Authorize (Roles = "Teacher")]
+        // Register(ViewUser user)
+        
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(ViewRegisterUser user)
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterClient(ViewClient user)
-        {
+            
             if (ModelState.IsValid)
             {
-                var newClient = Mapping<Client, ViewClient>.MappingUser(user);
-
-                RegisterUser<Client> regClient = new RegisterUser<Client>();
-                var result = await regClient.RegisterUsers(newClient, user.Password, _signInManager, _user);
+                IdentityUser newUser = null;
                 
-                if (result != null)
+                if (user.Role == UserRoles.Teacher)
                 {
-                    return RedirectToAction("UserAccount", "Home");
+                    newUser = Mapping<Teacher, ViewRegisterUser>.MappingUser(user);
                 }
-            }
-            return RedirectToAction("Index", "Home");
-        }
-        [HttpGet]
-        public IActionResult RegisterTeacher()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterTeacher(ViewTeacher user)
-        {
-            if (ModelState.IsValid)
-            {
-                var newTeacher = Mapping<Teacher, ViewTeacher>.MappingUser(user);
+                if (user.Role == UserRoles.Client)
+                {
+                    newUser = Mapping<Client, ViewRegisterUser>.MappingUser(user);
+                }
+                
+                var registerUser = new RegisterUser<IdentityUser>();
 
-                RegisterUser<Teacher> regTeacher = new RegisterUser<Teacher>();
-                var result = await regTeacher.RegisterUsers(newTeacher, user.Password, _signInManager, _user);
+                var result = await registerUser.RegisterInSystem(newUser, user.Password, _signInManager, _user);
                 
                 if (result != null)
                 {

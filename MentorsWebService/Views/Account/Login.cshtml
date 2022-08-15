@@ -1,16 +1,16 @@
 ﻿@model ViewUser
-
-<form asp-action="Login" asp-controller="Account" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" asp-for="Email">
-        <div id="emailHelp" class="form-text"></div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" asp-for="Password">
-        <div id="passwordHelp" class="form-text">Пароль должен быть более 8 символов.</div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="form-box">
+        <form asp-action="Login" asp-controller="Account" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="yourname@example.com" asp-for="Email">
+                <div id="emailHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" asp-for="Password">
+                <div id="passwordHelp" class="form-text">Пароль должен быть более 8 символов.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+</div>

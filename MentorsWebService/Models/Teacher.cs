@@ -9,7 +9,6 @@ namespace MentorsWebService.Models
     {
         public string Certificate { get; set; }
         
-        [Required]
         public string Bio { get; set; }
         
         public ICollection<Major> Majors { get; set; } = new List<Major>();

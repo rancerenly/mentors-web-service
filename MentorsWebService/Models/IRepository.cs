@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace MentorsWebService.Models
 {
@@ -11,6 +12,9 @@ namespace MentorsWebService.Models
 
         Client GetClient(string id);
         Teacher GetTeacher(string id);
+        IdentityUser GetUser(string id);
         Major GetMajor(int id);
+
+        void AddTeacher(Teacher teacher);
     }
 }

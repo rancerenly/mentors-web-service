@@ -20,6 +20,6 @@ namespace MentorsWebService.Models
         // void AddTeacher(Teacher teacher);
         void AddModule(Module module);
         void AddExercise(Exercise exercise);
-        void AddMajor(Major major);
+        int AddMajor(Major major);
     }
 }

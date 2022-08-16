@@ -1,1 +1,23 @@
 ﻿@model ViewExercise
+
+@{
+    ViewData["Title"] = "CreateExercise";
+}
+
+<h1>CreateExercise</h1>
+
+<div>
+    <form asp-action="CreateExercise" asp-controller="Major" method="post">
+        <div class="mb-3">
+            <label for="exInputTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exInputTitle" asp-for="Title">
+            <div id="exHelpTitle" class="form-text"></div>
+        </div>
+        <div class="mb-3">
+            <label for="exInputDescription" class="form-label">Description</label>
+            <input type="text" class="form-control" id="exInputDescription" asp-for="Description">
+            <div id="exHelpDescription" class="form-text">Описание задания</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Создать задание</button>
+    </form>
+</div>

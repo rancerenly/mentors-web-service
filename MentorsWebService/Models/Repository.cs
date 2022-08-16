@@ -50,7 +50,7 @@ namespace MentorsWebService.Models
             _dbContext.SaveChanges();
         }
 
-        public void AddMajor(Major major)
+        public int AddMajor(Major major)
         {
             Major newMajor = _dbContext.Majors.FirstOrDefault(o => o.Id == major.Id);
             if (newMajor == null)
@@ -58,6 +58,8 @@ namespace MentorsWebService.Models
                 _dbContext.Majors.Add(major);
             }
             _dbContext.SaveChanges();
+            
+            return major.Id;
         }
     }
 }

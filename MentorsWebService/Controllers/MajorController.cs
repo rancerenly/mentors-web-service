@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MentorsWebService.Controllers
 {
-    [Authorize(Roles = nameof(Teacher))]
+    // [Authorize(Roles = nameof(Teacher))]
+    [Authorize(Roles="Teacher")]
     public class MajorController : Controller
     {
         private IRepository repository;
@@ -32,6 +33,7 @@ namespace MentorsWebService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMajor(ViewMajor major)
         {
+            int majorId = 0;
             // string name = User.Identity.Name;
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
             if (currentUser != null)
@@ -42,9 +44,11 @@ namespace MentorsWebService.Controllers
                     Title = major.Title,
                     Teacher = currentUser as Teacher
                 }; 
-                repository.AddMajor(createMajor);
+                majorId = repository.AddMajor(createMajor);
             }
-            return Redirect("~/Home/Index"); // затычка
+            return Redirect($"~/Major/CreateModule/{majorId}");
+            
+            //return View("CreateModule", new ViewModule {MajorId = majorId});
         }
         [HttpGet]
         public IActionResult CreateModule(int id)
@@ -55,7 +59,6 @@ namespace MentorsWebService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateModule(ViewModule module)
         {
-            
             Major currentMajor = repository.GetMajor(module.MajorId);
             
             if (ModelState.IsValid && currentMajor != null)
@@ -68,7 +71,7 @@ namespace MentorsWebService.Controllers
                 
                 repository.AddModule(newModule);
             }
-            return null;
+            return Redirect("~/Major/CreateExercise");
         }
         
         [HttpGet]
@@ -91,8 +94,8 @@ namespace MentorsWebService.Controllers
                     Title = exercise.Title
                 };
                 repository.AddExercise(newExercise);
-                
-                // currentModule.Exercises.Add(newExercise);
+
+                return Redirect("~/Home/Index");
             }
             return null;
         }

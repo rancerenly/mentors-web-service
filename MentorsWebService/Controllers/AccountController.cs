@@ -13,13 +13,16 @@ namespace MentorsWebService.Controllers
 {
     public class AccountController : Controller
     {
+        private RoleManager<IdentityRole> _roleManager;
+        
         private SignInManager<IdentityUser> _signInManager;
         private IRepository _repository;
         private UserManager<IdentityUser> _user;
 
-        public AccountController(SignInManager<IdentityUser> signInManager, IRepository repo,
+        public AccountController(RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, IRepository repo,
             UserManager<IdentityUser> userManager)
         {
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _repository = repo;
             _user = userManager;
@@ -32,7 +35,7 @@ namespace MentorsWebService.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult>Login()
         {
             return View(new ViewUser());
         }
@@ -46,6 +49,7 @@ namespace MentorsWebService.Controllers
             if (getUser != null)
             {
                 await _signInManager.SignOutAsync();
+                
                 if ((await _signInManager.PasswordSignInAsync(getUser, user.Password, true, false)).Succeeded)
                 {
                     return Redirect("~/Home/Index");
@@ -55,14 +59,6 @@ namespace MentorsWebService.Controllers
             return RedirectToAction("Register");
         }
 
-        [Authorize(Roles = nameof(Teacher))]
-        public IActionResult CreateMajor()
-        {
-            // действия по созданию направления
-            // редирект на направление...
-            return View("Register");
-        }
-
         [HttpGet]
         public IActionResult Register()
         {
@@ -70,14 +66,9 @@ namespace MentorsWebService.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
-        // [Authorize (Roles = "Teacher")]
-        // Register(ViewUser user)
-        
         [AllowAnonymous]
         public async Task<IActionResult> Register(ViewRegisterUser user)
         {
-            
             if (ModelState.IsValid)
             {
                 IdentityUser newUser = null;
@@ -94,6 +85,8 @@ namespace MentorsWebService.Controllers
                 var registerUser = new RegisterUser<IdentityUser>();
 
                 var result = await registerUser.RegisterInSystem(newUser, user.Password, _signInManager, _user);
+
+                await _user.AddToRoleAsync(result, user.Role.ToString());
                 
                 if (result != null)
                 {

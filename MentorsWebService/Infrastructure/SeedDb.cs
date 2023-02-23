@@ -28,9 +28,9 @@ namespace MentorsWebService.Infrastructure
 
             if (!context.Roles.Any())
             {
-                context.Roles.Add(new IdentityRole("Teacher"));
+                /*context.Roles.Add(new IdentityRole("Teacher"));
                 context.Roles.Add(new IdentityRole("Client"));
-                context.SaveChanges();
+                context.SaveChanges();*/
             }
             if (!context.Majors.Any())
             {

@@ -2,11 +2,14 @@
 
 namespace MentorsWebService.Models
 {
-    public class Exercise
+    public class ViewExercise
     {
-        public int Id { get; set; }
+        public int ModuleId { get; set; }
+        
+        [Required]
         public string Title { get; set; }
+        
+        [Required]
         public string Description { get; set; }
-        public Module Module { get; set; }
     }
 }

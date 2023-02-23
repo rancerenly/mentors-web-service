@@ -14,7 +14,12 @@ namespace MentorsWebService.Models
         Teacher GetTeacher(string id);
         IdentityUser GetUser(string id);
         Major GetMajor(int id);
+        Module GetModule(int id);
+        Exercise GetExercise(int id);
 
-        void AddTeacher(Teacher teacher);
+        // void AddTeacher(Teacher teacher);
+        void AddModule(Module module);
+        void AddExercise(Exercise exercise);
+        int AddMajor(Major major);
     }
 }

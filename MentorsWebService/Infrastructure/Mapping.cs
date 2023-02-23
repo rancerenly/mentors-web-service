@@ -16,7 +16,7 @@ namespace MentorsWebService.Infrastructure
                 if (newData is Teacher teacher)
                 {
                     teacher.UserName = userDataView.Username;
-                    teacher.NormalizedEmail = userDataView.Email;
+                    teacher.Email = userDataView.Email;
                     teacher.Bio = userDataView.Bio;
                 
                     return newData;
@@ -25,7 +25,7 @@ namespace MentorsWebService.Infrastructure
                 if (newData is Client client)
                 {
                     client.UserName = userDataView.Username;
-                    client.NormalizedEmail = userDataView.Email;
+                    client.Email = userDataView.Email;
                     
                     return newData;
                 }

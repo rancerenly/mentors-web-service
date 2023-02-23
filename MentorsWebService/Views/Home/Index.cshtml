@@ -1,0 +1,31 @@
+@model IQueryable<Major>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@foreach (var item in Model)
+{
+    <div class="container px-4" style="margin-top: 5%; ">
+        <div class="row gx-5">
+            <div class="card mb-3" style="max-width: 540px; border-radius: 15px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img style="" src="https://thumb.tildacdn.com/tild3032-3534-4739-b162-646337303539/-/resize/744x/-/format/webp/Web-Development-Comp.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">@item.Description</p>
+                            <p class="card-text"><small class="text-muted">@item.Teacher.UserName</small></p>
+                            <a href="#" class="btn btn-primary" style="background: #8999A8;">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+}
+
+
+

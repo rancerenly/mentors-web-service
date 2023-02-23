@@ -11,6 +11,7 @@ _build/
 _site/
 Properties/
 .idea/
+./MentorsWebService/Migrations/
 
 # See #577
 # Use git add -f to force override .sln when required. Not needed in most cases.
@@ -228,3 +229,4 @@ __pycache__/
 
 # Windows thumbnail cache files
 Thumbs.db
+/MentorsWebService/Migrations

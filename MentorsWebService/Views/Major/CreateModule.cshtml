@@ -1,0 +1,17 @@
+﻿@model ViewModule
+@{
+    ViewData["Title"] = "CreateModule";
+}
+
+<h1>CreateModule</h1>
+
+<div>
+    <form asp-action="CreateModule" asp-controller="Major" method="post">
+        <div class="mb-3">
+            <label for="exInputTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="exInputTitle" asp-for="Title">
+            <div id="exHelpTitle" class="form-text"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Создать модуль</button>
+    </form>
+</div>

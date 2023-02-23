@@ -1,0 +1,13 @@
+.form-box{
+    height: 300px;
+    width: 500px;
+    padding: 20px 20px 20px 20px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+.form-control{
+    border-radius: 10px;
+}
+.btn-primary{
+    border-radius: 10px;
+}

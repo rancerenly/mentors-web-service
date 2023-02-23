@@ -1,0 +1,38 @@
+@model ViewRegisterUser
+
+<form asp-action="Register" asp-controller="Account" method="post">
+    <div asp-validation-summary="All" class="text-danger">
+    
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputUsername1" class="form-label">Username</label>
+        <input type="text" class="form-control" id="exampleInputUsername1" asp-for="Username">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" asp-for="Email">
+        <div id="emailHelp" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" asp-for="Password">
+        <div id="passwordHelp" class="form-text">Пароль должен быть более 8 символов.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword2" asp-for="PasswordConfirm">
+        <div id="passwordHelp2" class="form-text">Пароль должен быть более 8 символов.</div>
+    </div>
+    <div class="mb-3">
+                <label for="exampleInputBio" class="form-label">Bio</label>
+                <input type="text" class="form-control" id="exampleInputBio" asp-for="Bio">
+                <div id="BioHelp" class="form-text">Введите информацию о себе.</div>
+                </div>
+    <div class="mb-3">
+        <label for="exampleInputRole" class="form-label">Role</label>
+        <select id="exampleInputRole" asp-for="Role" class="form-control" asp-items="@new SelectList(Enum.GetNames(typeof(UserRoles)))">
+            <option disabled selected value="">Ваша роль</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
